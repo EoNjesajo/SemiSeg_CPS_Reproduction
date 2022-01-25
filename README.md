@@ -61,7 +61,7 @@ Semi Supervised Semantic Segmentation with Cross Pseudo Supervision
 - Open Dataset 시각화 결과(image, GT, CPS, BaseLine)
 ![result](https://user-images.githubusercontent.com/90492809/150952699-01caf552-7593-4763-9301-a03aadf20195.png)
 
-# 5. 평가
+## 5. 평가
 - 라벨을 가지지 않은 이미지를 사용해서 성능을 개선할 수 있는 방법이지만, 본 실험에서는 큰 개선 결과는 보이지 못했다.
 - 특히, IoU가 낮은 클래스에 대해서는 CPS에서 성능이 하락되게 되는데, 이는 라벨을 가진 이미지로 학습된 네트워크의 출력 결과로 해당 클래스에 대한 알맞지 않은  Pseudo segmentation map을 제공하고, 이를 통해 다른 네트워크에 대해 supervise하기 때문이라고 추측할 수 있다.
 - 그렇기 때문에, 모든 클래스에서 충분한 IoU를 갖추고, 라벨을 가지지 않는 이미지를 충분히 제공한다면 성능 향상에 도움이 될 것이다.
