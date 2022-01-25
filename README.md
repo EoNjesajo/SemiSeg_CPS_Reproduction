@@ -1,4 +1,4 @@
-# Experiment Reproduction(SemiSeg with CPS)
+# Experiment Reproduction and Review(SemiSeg with CPS)
 Semi Supervised Semantic Segmentation with Cross Pseudo Supervision
 
 - Paper : https://arxiv.org/abs/2106.01226
@@ -31,7 +31,33 @@ Semi Supervised Semantic Segmentation with Cross Pseudo Supervision
   |Weight decay|0.0005|
   |Evaluation Metric|mIoU|<br><br>
 ### 3) 차별된 설정 : Cross Pseudo Supervion
+![11](https://user-images.githubusercontent.com/90492809/150950613-1c2b5a15-4a34-469e-a42b-3a9ff1d882fb.png)
+- 두 개의 Parallel Segmentation Network로 구성된다. 두 네트워크는 동일한 구조를 가지지만, 가중치(θ1, θ2)은 다르게 초기화 된다.
+
+![Parallel Segmentation Network](https://user-images.githubusercontent.com/90492809/150950958-1f0372f9-a153-40e1-966a-03949c69ed9f.png)
+- 입력 X에는 동일한 증대가 적용되며, P는 Softmax normalization을 거친 후 network 출력인 Segmentation confidence map이고, Y는 pseudo segmentation map이라 불리는, One-Hot label Map이다.
+
+![structure](https://user-images.githubusercontent.com/90492809/150951044-c9477eef-c949-4ebb-a5fa-9bc1cc33874c.png)
+- Supervision loss는 두 개의 Parallel Segmentation Network를 통해 라벨이 지정된 이미지에 대해 표준 픽셀 단위 Cross Entropy Loss(lce)를 사용한다. y*i는 Ground Truth, W와 H는 각각 입력이미지의 너비와 높이를 나타낸다.
+
+<img width="400" alt="supervised loss" src="https://user-images.githubusercontent.com/90492809/150951736-bf44422f-98c1-43a5-a927-cd4079b6f7c1.png">
+- Cross Pseudo Supervision loss는 양방향이다. 첫 번째는 f(θ1)에서 f(θ2)로, f(θ1)에서 출력된 label map인 Y1을 사용하여 f(θ2)의 픽셀 단위 confidence map인 P2를 supervise한다. 두 번째는 f(θ2)에서 f(θ1)이다. 라벨이 지정되지 않은 데이터에 대한 CPS는 아래와 같이 작성되며, 같은 방식으로 라벨이 지정된 CPS도 정의된다.
+
+<img width="400" alt="CPS loss" src="https://user-images.githubusercontent.com/90492809/150951641-aa4a2726-31ed-4749-96c8-2d8ebb8bdc39.png">
+- 그래서 최종 Loss는 다음과 같이 작성된다.(λ는 trade-off 가중치를 의미한다.)
+
+![final loss](https://user-images.githubusercontent.com/90492809/150951835-c2e82c46-f407-4fb6-a0fe-bc60313b856d.png)
+
 
 ## 4. 연구 결과
-### 1) CPS vs Only Supervised
-### 2) 기타 결과 
+### CPS vs Only Supervised
+  |Loss(super)|Loss(super)|PASCAL VOC 2012|Open_Dataset|
+  |------|------|------|------|
+  |✓||69.183%|51.792%|
+  |✓|✓|71.028%|51.792%|<br><br>
+- Cross Pseudo Supervision Loss을 적용하면 Supervision Loss만 적용한 결과보다 개선된다는 것을 알 수 있다. Coss Pseudo supervision Loss은 PASCAL VOC 2012에서 1.85%로, 논문에서의 향상(3.77%)보다는 저조한 결과지만 향상된 것을 확인할 수 있다.
+- Open_Dataset은 얇은 구름 외 클래스는 개선을 보인 반면, 얇은 구름은 Baseline(약10~14%) 비해 낮은 결과(약2~3%)의 결과를 보인다. 
+- 그 외 구름 데이터셋에서 나타난 공통적인 특징은 IoU가 낮은 클래스에 대해 성능이 감소하는 것을 확인할 수 있다.
+- Open Dataset 시각화 결과(image, GT, CPS, BaseLine)
+![result](https://user-images.githubusercontent.com/90492809/150952699-01caf552-7593-4763-9301-a03aadf20195.png)
+
