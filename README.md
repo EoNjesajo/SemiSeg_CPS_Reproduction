@@ -51,7 +51,7 @@ Semi Supervised Semantic Segmentation with Cross Pseudo Supervision
 
 ## 4. 연구 결과
 ### CPS vs Only Supervised
-  |Loss(super)|Loss(super)|[PASCAL VOC 2012](https://github.com/EoNjesajo/SemiSeg_CPS_Reproduction/tree/main/log/PASCAL_VOC_2012)|[Open_Dataset](https://github.com/EoNjesajo/SemiSeg_CPS_Reproduction/tree/main/log/Cloud_Open_Dataset)|
+  |Loss(super)|Loss(CPS)|[PASCAL VOC 2012](https://github.com/EoNjesajo/SemiSeg_CPS_Reproduction/tree/main/log/PASCAL_VOC_2012)|[Open_Dataset](https://github.com/EoNjesajo/SemiSeg_CPS_Reproduction/tree/main/log/Cloud_Open_Dataset)|
   |------|------|------|------|
   |✓||69.183%|51.792%|
   |✓|✓|71.028%|52.163%|<br><br>
