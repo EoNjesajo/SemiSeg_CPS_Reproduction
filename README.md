@@ -56,8 +56,14 @@ Semi Supervised Semantic Segmentation with Cross Pseudo Supervision
   |✓||69.183%|51.792%|
   |✓|✓|71.028%|51.792%|<br><br>
 - Cross Pseudo Supervision Loss을 적용하면 Supervision Loss만 적용한 결과보다 개선된다는 것을 알 수 있다. Coss Pseudo supervision Loss은 PASCAL VOC 2012에서 1.85%로, 논문에서의 향상(3.77%)보다는 저조한 결과지만 향상된 것을 확인할 수 있다.
-- Open_Dataset은 얇은 구름 외 클래스는 개선을 보인 반면, 얇은 구름은 Baseline(약10~14%) 비해 낮은 결과(약2~3%)의 결과를 보인다. 
+- Open_Dataset은 얇은 구름 외 클래스는 개선을 보인 반면, 얇은 구름은 Baseline(IoU 약10~14%) 비해 낮은 결과(약2~3%)의 결과를 보인다. 
 - 그 외 구름 데이터셋에서 나타난 공통적인 특징은 IoU가 낮은 클래스에 대해 성능이 감소하는 것을 확인할 수 있다.
 - Open Dataset 시각화 결과(image, GT, CPS, BaseLine)
 ![result](https://user-images.githubusercontent.com/90492809/150952699-01caf552-7593-4763-9301-a03aadf20195.png)
 
+# 5. 평가
+- 라벨을 가지지 않은 이미지를 사용해서 성능을 개선할 수 있는 방법이지만, 본 실험에서는 큰 개선 결과는 보이지 못했다.
+- 특히, IoU가 낮은 클래스에 대해서는 CPS에서 성능이 하락되게 되는데, 이는 라벨을 가진 이미지로 학습된 네트워크의 출력 결과로 해당 클래스에 대한 알맞지 않은  Pseudo segmentation map을 제공하고, 이를 통해 다른 네트워크에 대해 supervise하기 때문이라고 추측할 수 있다.
+- 그렇기 때문에, 모든 클래스에서 충분한 IoU를 갖추고, 라벨을 가지지 않는 이미지를 충분히 제공한다면 성능 향상에 도움이 될 것이다.
+- 장점 : 라벨을 가지지 않는 이미지를 통해 라벨링에 필요한 비용 소모 없이 성능 향상을 시킬 수 있다.
+- 단점 : 라벨을 가지지 않는 이미지더라도 많은 양의 이미지를 필요로 하며, supervised에서 저조한 IoU를 가진 클래스에 대해서는 성능하락을 보인다. 
