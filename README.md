@@ -59,6 +59,7 @@ Semi Supervised Semantic Segmentation with Cross Pseudo Supervision
 - Open_Dataset은 얇은 구름 외 클래스는 개선을 보인 반면, 얇은 구름은 Baseline(IoU 약10~14%) 비해 낮은 결과(약2~3%)의 결과를 보인다. 
 - 공통적인 특징은 모두 해당하지는 않지만 IoU가 낮은 클래스에 대해 성능이 감소하는 것을 확인할 수 있다.
 - Open Dataset 시각화 결과(image, GT, CPS, BaseLine)
+
 ![result](https://user-images.githubusercontent.com/90492809/150952699-01caf552-7593-4763-9301-a03aadf20195.png)
 
 ## 5. 평가
