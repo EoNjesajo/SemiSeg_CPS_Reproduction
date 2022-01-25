@@ -19,7 +19,7 @@ Semi Supervised Semantic Segmentation with Cross Pseudo Supervision
   |Dataset|Class|Labeled|Unlabeled|Val|Etc|
   |------|------|------|------|------|------|
   |PASCAL VOC 2012|21(배경포함)|1323(1/8)|9259(7/8)|1449|JPG|
-  |Cloud Open Dataset|4(배경포함)|163(1/16)|2452(15/16)|320|JPG, NIR제거|<br><br>
+  |[Cloud Open Dataset](https://aihub.or.kr/aidata/7982)|4(배경포함)|163(1/16)|2452(15/16)|320|JPG, NIR제거|<br><br>
 - PASCAL VOC 2012 : JPG로 된 이미지로, 20개의 객체 클래스와 1개의 배경 클래스를 가진다. 10,582개의 학습 데이터 중 1/8에 해당하는 1323개는 라벨을 가지는 이미지로, 나머지 9259개는 라벨을 가지지않는 이미지로 활용한다. 검증용 이미지는 1449개의 이미지를 사용한다.
 - Open_Dataset : 4채널(+NIR) TIF로 된 이미지를 3채널 JPG로 변경한 것으로, 3개의 객체 클래스(두꺼운 구름, 얇은 구름, 그림자)와 1개의 배경 클래스를 가진다.  130개의 학습 데이터를 1024x1024로 나눈 2615개의 학습 데이터 중 1/16에 해당하는 163개는 라벨을 가지는 이미지로, 나머지 2452개는 라벨을 가지지않는 이미지로 활용한다.  검증용 이미지는 1024x1024로 나눠진 320개를 가진다. 
 ### 2) 공통된 설정
@@ -51,13 +51,13 @@ Semi Supervised Semantic Segmentation with Cross Pseudo Supervision
 
 ## 4. 연구 결과
 ### CPS vs Only Supervised
-  |Loss(super)|Loss(super)|PASCAL VOC 2012|Open_Dataset|
+  |Loss(super)|Loss(super)|[PASCAL VOC 2012](https://github.com/EoNjesajo/SemiSeg_CPS_Reproduction/tree/main/log/PASCAL_VOC_2012)|[Open_Dataset](https://github.com/EoNjesajo/SemiSeg_CPS_Reproduction/tree/main/log/Cloud_Open_Dataset)|
   |------|------|------|------|
   |✓||69.183%|51.792%|
-  |✓|✓|71.028%|51.792%|<br><br>
+  |✓|✓|71.028%|52.163%|<br><br>
 - Cross Pseudo Supervision Loss을 적용하면 Supervision Loss만 적용한 결과보다 개선된다는 것을 알 수 있다. Coss Pseudo supervision Loss은 PASCAL VOC 2012에서 1.85%로, 논문에서의 향상(3.77%)보다는 저조한 결과지만 향상된 것을 확인할 수 있다.
 - Open_Dataset은 얇은 구름 외 클래스는 개선을 보인 반면, 얇은 구름은 Baseline(IoU 약10~14%) 비해 낮은 결과(약2~3%)의 결과를 보인다. 
-- 그 외 구름 데이터셋에서 나타난 공통적인 특징은 IoU가 낮은 클래스에 대해 성능이 감소하는 것을 확인할 수 있다.
+- 공통적인 특징은 모두 해당하지는 않지만 IoU가 낮은 클래스에 대해 성능이 감소하는 것을 확인할 수 있다.
 - Open Dataset 시각화 결과(image, GT, CPS, BaseLine)
 ![result](https://user-images.githubusercontent.com/90492809/150952699-01caf552-7593-4763-9301-a03aadf20195.png)
 
