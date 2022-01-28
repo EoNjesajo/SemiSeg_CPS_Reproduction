@@ -25,7 +25,7 @@ Semi Supervised Semantic Segmentation with Cross Pseudo Supervision
 ### 2) 공통된 설정
   |Dataset|Class|
   |------|------|
-  |Model Architecture|Evaluation Metric|
+  |Model Architecture|DeepLabv3+ with ResNet-50|
   |Optimizer|Mini Batch SGD|
   |Momentum|0.9|
   |Weight decay|0.0005|
