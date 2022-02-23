@@ -56,7 +56,7 @@ Semi Supervised Semantic Segmentation with Cross Pseudo Supervision
   |✓||69.183%|51.792%|
   |✓|✓|71.028%|52.163%|<br><br>
 - Cross Pseudo Supervision Loss을 적용하면 Supervision Loss만 적용한 결과보다 개선된다는 것을 알 수 있다. Coss Pseudo supervision Loss은 PASCAL VOC 2012에서 1.85%로, 논문에서의 향상(3.77%)보다는 저조한 결과지만 향상된 것을 확인할 수 있다.
-- Open_Dataset은 얇은 구름 외 클래스는 개선을 보인 반면, 얇은 구름은 Baseline(IoU 약10~14%) 비해 낮은 결과(약2~3%)의 결과를 보인다. 
+- Open_Dataset은 얇은 구름 외 클래스는 개선을 보인 반면, 얇은 구름은 Baseline(IoU 약10~14%) 비해 낮은 결과(약 2%)의 결과를 보인다. 
 - 공통적인 특징은 모두 해당하지는 않지만 IoU가 낮은 클래스에 대해 성능이 감소하는 것을 확인할 수 있다.
 - Open Dataset 시각화 결과(image, GT, CPS, BaseLine)
 
